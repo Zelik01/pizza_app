@@ -5,6 +5,6 @@ const auth = require("../authentication");
 
 router.post("/signup", userController.createUser);
 router.get("/", userController.getUsers);
-router.delete("/:id",	userController.deleteUser);
+router.delete("/:id",auth.authenticateUser,	userController.deleteUser);
 
 module.exports = router;
