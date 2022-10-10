@@ -2,8 +2,7 @@ const express = require('express');
 const moment = require('moment');
 const mongoose = require('mongoose');
 const orderModel = require('./orderModel');
-
-const PORT = 3334
+const CONFIG = require("./config/config")
 
 const app = express()
 
@@ -79,7 +78,7 @@ app.delete('/order/:id', async (req, res) => {
 })
 
 
-mongoose.connect('mongodb://localhost:27017')
+mongoose.connect(process.env.URL)
 
 mongoose.connection.on("connected", () => {
 	console.log("Connected to MongoDB Successfully");
@@ -90,6 +89,6 @@ mongoose.connection.on("error", (err) => {
 	console.log(err);
 });
 
-app.listen(PORT, () => {
-    console.log('Listening on port, ', PORT)
+app.listen(process.env.PORT, () => {
+    console.log('Listening on port, ',process.env.PORT)
 })
